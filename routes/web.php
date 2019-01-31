@@ -63,3 +63,9 @@ Route::get('eloquent', function(){
 
     return view('eloquent', compact('mahasiswa'));
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/dosen', 'DosenController');
