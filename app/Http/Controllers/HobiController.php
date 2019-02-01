@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dosen;
+use App\Hobi;
 
-class DosenController extends Controller
+class HobiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::all();
+        $hobi = Hobi::all();
 
-        return view('dosen.index', compact('dosen'));
+        return view('hobi.index', compact('hobi'));
     }
 
     /**
@@ -26,7 +26,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create');
+        return view('hobi.create');
     }
 
     /**
@@ -37,17 +37,16 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        $dosen = new Dosen;
+        $hobi = new Hobi;
 
-        $dosen->nama = $request->get('nama');
-        $dosen->nipd = $request->get('nipd');
-        $dosen->save();
+        $hobi->hobi = $request->hobi;
+        $hobi->save();
         \Session::flash('flash_notification', [
             "level" => "success",
-            "message" => "Berhasil menyimpan <b>$dosen->nama</b>"
+            "message" => "Berhasil menyimpan data <b>$hobi->hobi</b>"
             ]);
 
-        return redirect()->route('dosen.index');
+        return redirect()->route('hobi.index');
     }
 
     /**
@@ -58,9 +57,9 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $hobi = Hobi::findOrFail($id);
 
-        return view('dosen.show', compact('dosen'));
+        return view('hobi.show', compact('hobi'));
     }
 
     /**
@@ -71,9 +70,9 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $hobi = Hobi::findOrFail($id);
 
-        return view('dosen.edit', compact('dosen'));
+        return view('hobi.edit', compact('hobi'));
     }
 
     /**
@@ -85,17 +84,15 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dosen = Dosen::findOrFail($id);
-
-        $dosen->nama = $request->get('nama');
-        $dosen->nipd = $request->get('nipd');
-        $dosen->save();
+        $hobi = Hobi::findOrFail($id);
+        $hobi->hobi = $request->hobi;
+        $hobi->save();
         \Session::flash('flash_notification', [
             "level" => "warning",
-            "message" => "Berhasil mengubah data <b>$dosen->nama</b>"
+            "message" => "Berhasil mengubah data <b></b>"
             ]);
-            
-        return redirect()->route('dosen.index');
+
+        return redirect()->route('hobi.index');
     }
 
     /**
@@ -106,12 +103,12 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        $dosen = Dosen::findOrFail($id)->delete();
+        $hobi = Hobi::findOrFail($id)->delete();
         \Session::flash('flash_notification', [
             "level" => "danger",
             "message" => "Berhasil menghapus data <b></b>"
             ]);
-            
-        return redirect()->route('dosen.index');
+
+        return redirect()->route('hobi.index');
     }
 }

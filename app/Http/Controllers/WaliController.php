@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dosen;
+use App\Wali;
+use App\Mahasiswa;
 
-class DosenController extends Controller
+class WaliController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::all();
+        $wali = Wali::with('mahasiswa')->get();
 
-        return view('dosen.index', compact('dosen'));
+        return view('wali.index', compact('wali'));
     }
 
     /**
@@ -26,7 +27,9 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create');
+        $mhs = Mahasiswa::all();
+
+        return view('wali.create', compact('mhs'));
     }
 
     /**
@@ -37,17 +40,16 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        $dosen = new Dosen;
-
-        $dosen->nama = $request->get('nama');
-        $dosen->nipd = $request->get('nipd');
-        $dosen->save();
+        $wali = new Wali;
+        $wali->nama = $request->nama;
+        $wali->id_mahasiswa = $request->mhs;
+        $wali->save();
         \Session::flash('flash_notification', [
             "level" => "success",
-            "message" => "Berhasil menyimpan <b>$dosen->nama</b>"
+            "message" => "Berhasil menambah data <b>$wali->nama</b>"
             ]);
 
-        return redirect()->route('dosen.index');
+        return redirect()->route('wali.index');
     }
 
     /**
@@ -58,9 +60,10 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $wali = Wali::findOrFail($id);
+        $mhs = Mahasiswa::all();
 
-        return view('dosen.show', compact('dosen'));
+        return view('wali.show', compact('mhs', 'wali'));
     }
 
     /**
@@ -71,9 +74,10 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $wali = Wali::findOrFail($id);
+        $mhs = Mahasiswa::all();
 
-        return view('dosen.edit', compact('dosen'));
+        return view('wali.edit', compact('mhs', 'wali'));
     }
 
     /**
@@ -85,17 +89,17 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $wali = Wali::findOrFail($id);
 
-        $dosen->nama = $request->get('nama');
-        $dosen->nipd = $request->get('nipd');
-        $dosen->save();
+        $wali->nama = $request->nama;
+        $wali->id_mahasiswa = $request->mhs;
+        $wali->save();
         \Session::flash('flash_notification', [
-            "level" => "warning",
-            "message" => "Berhasil mengubah data <b>$dosen->nama</b>"
+            "level" => "success",
+            "message" => "Berhasil menambah data <b>$wali->nama</b>"
             ]);
-            
-        return redirect()->route('dosen.index');
+
+        return redirect()->route('wali.index');
     }
 
     /**
@@ -106,12 +110,12 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        $dosen = Dosen::findOrFail($id)->delete();
+        $wali = Wali::findOrFail($id)->delete();
         \Session::flash('flash_notification', [
             "level" => "danger",
             "message" => "Berhasil menghapus data <b></b>"
             ]);
-            
-        return redirect()->route('dosen.index');
+
+        return redirect()->route('wali.index');
     }
 }

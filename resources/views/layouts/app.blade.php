@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dosen.index') }}">Dosen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('hobi.index') }}">Hobi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,6 +81,7 @@
         </nav>
 
         <main class="py-4">
+            @include('layouts.flash')
             @yield('content')
         </main>
     </div>

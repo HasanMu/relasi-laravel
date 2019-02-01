@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.flash')
     <div class="container">
         <h2>Data Dosen</h2>
             <a href="{{route('dosen.create')}}" class="btn btn-outline-primary">Tambah Data</a>
@@ -30,17 +29,11 @@
 
                                 <a href="{{route('dosen.edit', ['id' => $data->id])}}" class="btn btn-outline-primary">Edit Data</a>
                                 <a href="{{route('dosen.show', ['id' => $data->id])}}" class="btn btn-outline-info">Detail Data</a>
-                                <button type="submit" class="btn btn-outline-danger">Delete Data</button>
+                                <button type="submit" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-outline-danger">Delete Data</button>
                             </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td scope="row"></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                 @endforeach
-                
             </tbody>
         </table>
     </div>

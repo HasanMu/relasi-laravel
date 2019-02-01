@@ -12,7 +12,8 @@
               <label for="">NIPD Dosen</label>
               <input type="text" name="nipd" id="" class="form-control" placeholder="NIPD dosen" aria-describedby="helpId">
             </div>
-            <button type="submit" class="btn btn-outline-primary">Simpan</button>
+            <button type="submit" class="btn btn-outline-success">Simpan</button>
+            <a name="" id="" class="btn btn-outline-secondary" href="{{route('dosen.index')}}" role="button">Kembali</a>
         </form>
     </div>
 @endsection

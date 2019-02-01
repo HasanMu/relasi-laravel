@@ -68,4 +68,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('/hobi', 'HobiController');
 Route::resource('/dosen', 'DosenController');
+Route::resource('/wali', 'WaliController');
+Route::resource('/mahasiswa', 'MahasiswaController');
