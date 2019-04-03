@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\Dosen;
+use App\Hobi;
 
 class MahasiswaController extends Controller
 {
@@ -28,8 +29,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         $dosen = Dosen::all();
-
-        return view('mahasiswa.create', compact('dosen'));
+        $hobi = Hobi::all();
+        return view('mahasiswa.create', compact('hobi', 'dosen'));
     }
 
     /**
@@ -45,6 +46,8 @@ class MahasiswaController extends Controller
         $mhs->nim = $request->nim;
         $mhs->id_dosen = $request->dosen;
         $mhs->save();
+
+        $mhs->hobi()->attach($request->hobi);
         \Session::flash('flash_notification', [
             "level" => "success",
             "message" => "Berhasil menambah data <b>$mhs->nama</b>"
@@ -77,8 +80,10 @@ class MahasiswaController extends Controller
     {
         $mhs = Mahasiswa::findOrFail($id);
         $dosen = Dosen::all();
-
-        return view('mahasiswa.edit', compact('mhs', 'dosen'));
+        $hobi = Hobi::all();
+        $selected = $mhs->hobi->pluck('id')->toArray();
+        //
+        return view('mahasiswa.edit', compact('mhs', 'hobi', 'selected', 'dosen'));
     }
 
     /**
@@ -95,6 +100,8 @@ class MahasiswaController extends Controller
         $mhs->nim = $request->nim;
         $mhs->id_dosen = $request->dosen;
         $mhs->save();
+
+        $mhs->hobi()->sync($request->hobi);
         \Session::flash('flash_notification', [
             "level" => "warning",
             "message" => "Berhasil mengubah data <b>$mhs->nama</b>"
@@ -111,7 +118,9 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findOrFail($id)->delete();
+        $mhs = Mahasiswa::findOrFail($id);
+        $mhs->hobi()->detach($mhs->id);
+        $mhs->delete();
         \Session::flash('flash_notification', [
             "level" => "danger",
             "message" => "Berhasil menghapus data <b></b>"

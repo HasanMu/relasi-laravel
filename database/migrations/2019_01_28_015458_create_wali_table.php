@@ -18,6 +18,7 @@ class CreateWaliTable extends Migration
             $table->string('nama');
             $table->unsignedInteger('id_mahasiswa');
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswa')->onDelete('cascade');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

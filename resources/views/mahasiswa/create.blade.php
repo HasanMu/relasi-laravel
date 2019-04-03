@@ -14,9 +14,17 @@
             </div>
             <div class="form-group">
               <label for="">Nama dosen pembimbing</label>
-              <select class="form-control" name="dosen">
+              <select class="form-control" id="dosen_pembimbing" name="dosen">
                 @foreach($dosen as $data)
                     <option value="{{$data->id}}">{{$data->nama}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Hobi</label>
+              <select class="form-control" id="multiple" name="hobi[]" multiple>
+                @foreach($hobi as $data)
+                    <option value="{{$data->id}}">{{$data->hobi}}</option>
                 @endforeach
               </select>
             </div>

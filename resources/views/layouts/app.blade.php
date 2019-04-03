@@ -10,14 +10,28 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#multiple').select2({
+                placeholder: 'Hobi',
+                allowClear: true
+            });
 
+            $('#dosen_pembimbing').select2({
+                selectOnClose: true
+            });
+        });
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.min.css')}}" rel="stylesheet" />
+    @toastr_css
 </head>
 <body>
     <div id="app">
@@ -41,6 +55,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('biodata.index') }}">Biodata</a>
                         </li>
                     </ul>
 
@@ -85,5 +102,25 @@
             @yield('content')
         </main>
     </div>
+
+<script>
+        inputBox = document.getElementById("foto"); // Mengambil elemen tempat Input gambar
+
+        inputBox.addEventListener('change',function(input){ // Jika tempat Input Gambar berubah
+
+            var box = document.getElementById("preview"); // mengambil elemen cover_preview
+            var img = input.target.files; // mengambil gambar
+
+            var reader = new FileReader(); // memanggil pembaca file/gambar
+            reader.onload = function(e){ // ketika sudah ada
+            box.setAttribute('src',e.target.result); // membuat alamat gambar
+            }
+            reader.readAsDataURL(img[0]); // menampilkan gambar
+        }
+        );
+</script>
 </body>
+@jquery
+@toastr_js
+@toastr_render
 </html>

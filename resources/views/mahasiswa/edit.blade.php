@@ -21,6 +21,14 @@
                 @endforeach
               </select>
             </div>
+            <div class="form-group">
+              <label for="">Hobi</label>
+              <select class="form-control" id="multiple" name="hobi[]" multiple>
+                @foreach($hobi as $data)
+                    <option value="{{$data->id}}" {{ (in_array($data->id, $selected)) ? 'selected' : '' }}>{{$data->hobi}}</option>
+                @endforeach
+              </select>
+            </div>
             <button type="submit" class="btn btn-outline-success">Simpan</button>
             <a name="" id="" class="btn btn-outline-secondary" href="{{route('mahasiswa.index')}}" role="button">Kembali</a>
         </form>

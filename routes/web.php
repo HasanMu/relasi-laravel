@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -16,9 +17,9 @@ Route::get('/', function () {
 });
 
 Route::get('/relasi-1', function () {
-    
+
     $mahasiswa = App\Mahasiswa::where('nim', '=', '1015015072')->first();
-    
+
     return $mahasiswa->wali->nama;
 });
 
@@ -72,3 +73,4 @@ Route::resource('/hobi', 'HobiController');
 Route::resource('/dosen', 'DosenController');
 Route::resource('/wali', 'WaliController');
 Route::resource('/mahasiswa', 'MahasiswaController');
+Route::resource('/biodata', 'BiodataController');

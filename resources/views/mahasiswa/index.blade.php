@@ -12,6 +12,7 @@
                 <th>Nama</th>
                 <th>NIM</th>
                 <th>Nama Dosen</th>
+                <th>Daftar Isi</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -24,6 +25,13 @@
                     <td>{{$data->nama}}</td>
                     <td>{{$data->nim}}</td>
                     <td>{{$data->dosen->nama}}</td>
+                    <td>
+                        <ol>
+                            @foreach ($data->hobi as $item)
+                                <li>{{ $item->hobi }}</li>
+                            @endforeach
+                        </ol>
+                    </td>
                     <td>
                         <form action="{{route('mahasiswa.destroy', ['id' => $data->id])}}" method="post">
                             @csrf
