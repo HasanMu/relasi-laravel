@@ -15,6 +15,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        view()->composer('frontend.blog.side', function ($view) {
+            $kategori = \App\Kategori::all();
+            $tag = \App\Tag::all();
+            $recent = \App\Artikel::orderBy('created_at', 'desc')->take(4)->get();
+            $view->with(compact('kategori','tag', 'recent'));
+        });
+
+        // view()->composer('frontend.blog.sidebar2', function ($view) {
+        //     $author = \App\Artikel::first();
+        //     $cat = \App\Kategori::all();
+        //     $tags = \App\Tag::all();
+        //     $recent = \App\Artikel::orderBy('created_at', 'desc')->take(4)->get();
+        //     $view->with(compact('cat', 'recent','author', 'tags'));
+        // });
+
     }
 
     /**

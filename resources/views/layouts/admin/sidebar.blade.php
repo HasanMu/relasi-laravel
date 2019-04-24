@@ -1,36 +1,35 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="">World Comics</a>
+            <a href="">MY BLOG</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="">WC</a>
+            <a href="">MB</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="dropdown {{ (request()->is('admin')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                    <li class={{ (request()->is('admin')) ? 'active' : '' }}><a class="nav-link" href="{{ route('admin.index') }}">General Dashboard</a></li>
-                    <li><a class="nav-link" href="{{ route('admin.index') }}">Ecommerce Dashboard</a></li>
+                    <li class={{ (request()->is('admin')) ? 'active' : '' }}><a class="nav-link" href="">General Dashboard</a></li>
+                    <li><a class="nav-link" href="">Ecommerce Dashboard</a></li>
                 </ul>
             </li>
             <li class="menu-header">Manage</li>
             <li class={{ (request()->is('admin/users')) ? 'active' : '' }}><a class="nav-link" href="{{ url('/admin/users') }}"><i class="fas fa-users"></i> <span>Users</span></a></li>
-            <li class={{ (request()->is('admin/comics')) ? 'active' : '' }}><a class="nav-link" href="{{ url('/admin/comics') }}"><i class="fas fa-scroll"></i> <span>Comics</span></a></li>
+            <li class={{ (request()->is('admin/artikel')) ? 'active' : '' }}><a class="nav-link" href="{{ url('/admin/artikel') }}"><i class="fas fa-scroll"></i> <span>Artikel</span></a></li>
             <li
-            @if (request()->is('admin/genres'))
+            @if (request()->is('admin/kategori'))
             class="dropdown active"
-            @elseif (request()->is('admin/categories'))
+            @elseif (request()->is('admin/tag'))
             class="dropdown active"
             @elseif (request()->is('admin/days'))
             class="dropdown active"
             @endif>
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Components Comics</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Komponen Artikel</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ (request()->is('admin/genres')) ? 'active' : '' }}"><a class="nav-link" href="{{ url('/admin/genres') }}">Genre</a></li>
-                    <li class="{{ (request()->is('admin/categories')) ? 'active' : '' }}"><a class="nav-link" href="{{ url('/admin/categories') }}">Category</a></li>
-                    <li class="{{ (request()->is('admin/days')) ? 'active' : '' }}"><a class="nav-link" href="{{ url('/admin/days') }}">Day</a></li>
+                    <li class="{{ (request()->is('admin/kategori')) ? 'active' : '' }}"><a class="nav-link" href="{{ url('/admin/kategori') }}">Kategori</a></li>
+                    <li class="{{ (request()->is('admin/tag')) ? 'active' : '' }}"><a class="nav-link" href="{{ url('/admin/tag') }}">Tag</a></li>
                 </ul>
             </li>
 
